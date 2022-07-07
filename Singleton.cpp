@@ -91,10 +91,18 @@ void test_mutex_singleton() {
     SingletonWithMutex* test_mutex_1 = SingletonWithMutex::get_instance();
     SingletonWithMutex* test_mutex_2 = SingletonWithMutex::get_instance();
 
-    std::thread thread(test_mutex);
-    thread.join();
+    std::thread thread1(test_mutex);
+    std::thread thread2(test_mutex);
+    std::thread thread3(test_mutex);
+    std::thread thread4(test_mutex);
+    std::thread thread5(test_mutex);
+    thread5.join();
+    thread4.join();
+    thread3.join();
+    thread2.join();
+    thread1.join();
 
-    std::cout << test_mutex_1->test_counter << ' ' << test_mutex_2->test_counter << '\n';   // 1 1
+    std::cout << test_mutex_1->test_counter << ' ' << test_mutex_2->test_counter << '\n';   // 5 5
 }
 
 int main() {
