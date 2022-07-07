@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 project(patterns)
 
 set(CMAKE_CXX_STANDARD 20)
-ADD_COMPILE_OPTIONS("-fconcepts")
+set(CMAKE_CXX_FLAGS "-fconcepts -lpthread -pthread")
 
 add_executable(strategy Strategy.cpp)
 add_executable(decorator Decorator.cpp Bridge.cpp Visitor.cpp Builder.cpp Prototype_with_template_args.cpp Prototype.cpp Singleton.cpp)
