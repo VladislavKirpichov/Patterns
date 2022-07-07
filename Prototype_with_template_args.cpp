@@ -5,6 +5,7 @@
 #include <memory>
 #include <iostream>
 
+
 class PrototypeFactory {
 public:
     template <typename T>
@@ -13,6 +14,7 @@ public:
         return std::make_unique<T>(object);
     }
 };
+
 
 struct Checker {
     static inline int count = 1;
@@ -25,6 +27,7 @@ struct Checker {
         return output;
     }
 };
+
 
 int main() {
     Checker checker{};

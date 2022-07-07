@@ -59,6 +59,7 @@ private:
     Car car;
 };
 
+
 std::ostream &operator<<(std::ostream &output, const Car &car) {
     output << "Name: " << car.name << "  |  "
            << "Engine: " << car.engine.type << "  |  "
