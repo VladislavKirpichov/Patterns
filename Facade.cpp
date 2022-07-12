@@ -37,8 +37,7 @@ public:
 
 class Facade {
 public:
-    Facade()
-        : _subsystem_1(), _subsystem_2() {}
+    Facade() : _subsystem_1(), _subsystem_2() {}
 
     // Фасад выполняет всю настройку системы. Клиенту достаточно вызвать всего один метод фасада.
     void setup_system() {
