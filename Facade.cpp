@@ -1,11 +1,7 @@
-//
-// Created by vladislav on 12.07.22.
-//
-
 /*
- * Паттерн Фасад
+ * Facade pattern
  *
- * Назначение: предоставляет простой интерфейс к сложной системе.
+ * Intent: provides simplified interface to complex system
  */
 
 #include <iostream>
@@ -13,11 +9,11 @@
 
 class Subsystem1 {
 public:
-    void _subsystem1_get_ready() const {
+    void subsystem1_get_ready() const {
         std::cout << "Subsystem1: Ready!" << '\n';
     }
 
-    void _subsystem1_run() const {
+    void subsystem1_run() const {
         std::cout << "Subsystem1 is currently running..." << '\n';
     }
 };
@@ -25,11 +21,11 @@ public:
 
 class Subsystem2 {
 public:
-    void _subsystem2_get_ready() const {
+    void subsystem2_get_ready() const {
         std::cout << "Subsystem2: Ready!" << '\n';
     }
 
-    void _subsystem2_run() const {
+    void subsystem2_run() const {
         std::cout << "Subsystem2 is currently running..." << '\n';
     }
 };
@@ -39,13 +35,13 @@ class Facade {
 public:
     Facade() : _subsystem_1(), _subsystem_2() {}
 
-    // Фасад выполняет всю настройку системы. Клиенту достаточно вызвать всего один метод фасада.
+    // Facade does all setup of the system. Client only needs to call one method of facade to setup system.
     void setup_system() {
-        _subsystem_1->_subsystem1_get_ready();
-        _subsystem_2->_subsystem2_get_ready();
+        _subsystem_1->subsystem1_get_ready();
+        _subsystem_2->subsystem2_get_ready();
 
-        _subsystem_1->_subsystem1_run();
-        _subsystem_2->_subsystem2_run();
+        _subsystem_1->subsystem1_run();
+        _subsystem_2->subsystem2_run();
     }
 
 protected:
@@ -56,7 +52,7 @@ protected:
 int main() {
     Facade facade;
 
-    // Клиентский код работает с подсистемами через удобный интерфейс который предоставляет фасад
+    // Client works with system through one convenient method
     facade.setup_system();
     return 0;
 }

@@ -1,8 +1,9 @@
-//
-// Created by vladislav on 30.06.22.
-//
-
-// https://github.com/RefactoringGuru/design-patterns-cpp/blob/main/src/Decorator/Conceptual/main.cc
+/*
+ * Decorator pattern
+ *
+ * Intent: Lets you change the behavior of the object by placing these object
+ * inside special wrapper that contains new behavior.
+ */
 
 #include <iostream>
 #include <string>

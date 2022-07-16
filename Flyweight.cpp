@@ -1,11 +1,7 @@
-//
-// Created by vladislav on 12.07.22.
-//
-
 /*
- * Паттерн приспособленец
+ * Flyweight pattern
  *
- * Назначение: уменьшение использования памяти за счет вынесения совместного использования
+ * Intent: to minimize memory usage by sharing common parts of state between multiple objects
  */
 
 #include <string>
@@ -15,12 +11,14 @@
 #include <vector>
 #include <unordered_map>
 
-enum class CarClass { Comfort, Buisness, Premium, Luxury };
+enum class CarClass {
+    Comfort, Buisness, Premium, Luxury
+};
 
 // Shared state
 struct CarType {
     explicit CarType(std::string model = "", std::string manufacturer = "", CarClass car_class = CarClass::Comfort,
-            char ISO_type = 'A', int max_speed = 220)
+                     char ISO_type = 'A', int max_speed = 220)
             : model(std::move(model)),
               manufacturer(std::move(manufacturer)),
               car_class(car_class),
@@ -35,7 +33,7 @@ struct CarType {
 };
 
 
-// Приспособленец хранит общую часть состояния объектов.
+// Flyweight stores common parts of objects
 class Flyweight {
 public:
     Flyweight() = default;
@@ -43,8 +41,13 @@ public:
     explicit Flyweight(CarType car_type)
             : _car_type(std::move(car_type)) {}
 
-    Flyweight& operator=(const CarType& car_type) { _car_type = car_type; return *this; }
+    Flyweight& operator=(const CarType& car_type) {
+        _car_type = car_type;
+        return *this;
+    }
+
     CarType& get_car_type() { return _car_type; }
+
     [[nodiscard]] const CarType& get_car_type() const { return _car_type; }
 
 private:
@@ -52,10 +55,11 @@ private:
 };
 
 
+// The Flyweight Factory creates and manages the Flyweight objects
 class FlyweightFactory {
 public:
     FlyweightFactory(std::initializer_list<CarType> types) {
-        for (auto& i : types) {
+        for (auto& i: types) {
             _hash_table[hash_car_type(i)] = i;
         }
     }
@@ -78,10 +82,10 @@ private:
 class Car {
 public:
     Car(std::string owner, Flyweight& flyweight)
-        : _owner(std::move(owner)),
-          _flyweight(flyweight) {}
+            : _owner(std::move(owner)),
+              _flyweight(flyweight) {}
 
-    friend std::ostream &operator<<(std::ostream& os, const Car& car) {
+    friend std::ostream& operator<<(std::ostream& os, const Car& car) {
         return os << "Owner: " << car._owner << '\n'
                   << "Info: " << car._flyweight.get_car_type().manufacturer
                   << ' ' << car._flyweight.get_car_type().model;
@@ -100,7 +104,6 @@ protected:
 };
 
 
-
 int main() {
     CarType premium{"S-Class", "Mercedes-Benz", CarClass::Premium};
     CarType buisness{"E-Class", "Mercedes-Benz", CarClass::Buisness};
@@ -115,7 +118,7 @@ int main() {
         cars.emplace_back("Rick", factory.get_flyweight(comfort));
     }
 
-    for (auto& i : cars)
+    for (auto& i: cars)
         std::cout << i << '\n';
 
     // Проверим сколько объектов CarType мы храним на данный момент. Всего было создано

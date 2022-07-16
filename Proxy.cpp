@@ -1,7 +1,3 @@
-//
-// Created by vladislav on 14.07.22.
-//
-
 /*
  * Паттерн заместитель (proxy)
  *
@@ -10,15 +6,11 @@
  */
 
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <vector>
 
 class IAccount {
 public:
     virtual void print_user_info() = 0;
-
-protected:
 };
 
 
