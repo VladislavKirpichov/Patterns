@@ -1,4 +1,9 @@
-// https://github.com/RefactoringGuru/design-patterns-cpp/blob/main/src/Strategy/Conceptual/main.cc
+/*
+ * Strategy pattern
+ *
+ * Intent: lets you define family of algorithms and makes them interchangeable.
+ */
+
 
 #include <iostream>
 #include <utility>
@@ -12,12 +17,14 @@ concept is_range = requires(T& a) {
     std::end(a);
 };
 
+
 // Interface for sorting algorithms
 template <class Range, class T>
 requires is_range<Range>
 struct SortAlgorithm {
     virtual void operator ()(Range& range) const = 0;
 };
+
 
 template <class Range, class T>
 struct AscendingSort : SortAlgorithm<Range, T> {
@@ -26,12 +33,14 @@ struct AscendingSort : SortAlgorithm<Range, T> {
     }
 };
 
+
 template <class Range, class T>
 struct DescendingSort : SortAlgorithm<Range, T> {
     void operator ()(Range& range) const override {
         std::sort(std::begin(range), std::end(range), std::greater<T>());
     }
 };
+
 
 class Context {
 public:
@@ -67,6 +76,7 @@ private:
     // strategy. It should work with all strategies via the Strategy interface.
     std::unique_ptr<SortAlgorithm<std::vector<int>, int>> _sort;
 };
+
 
 int main() {
     Context context{{5, 3, 6, 3, 7, 8, 5}, new AscendingSort<std::vector<int>, int>};
