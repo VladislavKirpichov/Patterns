@@ -77,7 +77,7 @@ public:
             _component_a.do_logic();
         }
         else if (event == Events::B) {
-            std::cout << "Mediator reacts on B and triggers component A:" << '\n';
+            std::cout << "Mediator reacts on B and triggers component B:" << '\n';
             _component_b.do_logic();
         }
         else {
@@ -101,7 +101,7 @@ void client() {
 
     component_a.do_b();
     // Output:
-    // Mediator reacts on B and triggers component A:
+    // Mediator reacts on B and triggers component B:
     // Concrete component B does some logic...
 
     component_b.do_a();
